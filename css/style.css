@@ -3,26 +3,24 @@
    ======================================== */
 
 :root {
-  /* --color-bg: #1A1A2E; */
-  /* --color-bg-card: #2E2E45; */
-  --color-bg: #0F0F1E;
-  --color-bg-light: #F5F0E8;
-  --color-gold: #C9A96E;
-  --color-gold-hover: #B8955A;
-  --color-text: #F5F0E8;
-  --color-text-muted: rgba(245, 240, 232, 0.55);
-  --color-text-dark: #1A1A2E;
-  --color-border: rgba(201, 169, 110, 0.2);
-  --font-heading: Georgia, "Times New Roman", serif;
-  --font-body: Arial, sans-serif;
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --transition: 0.25s ease;
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --color-bg: #FFFFFF;            
+  --color-bg-light: #F9F8F6;     
+  --color-bg-card: #FFFFFF;       
+  --color-gold: #C5B39A;          
+  --color-gold-hover: #A8957C;    
+  --color-text: #1A1A1A;       
+  --color-text-muted: #75706B;   
+  --color-text-dark: #000000;     
+  --color-border: #E5E0DA;        
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.06); 
+  --font-heading: "Inter", Georgia, serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --max-width: 1200px;
-  --section-padding: 50px 20px;
-
+  --section-padding: 80px 20px;
   /* JS подсвечивает фон за мышкой */
   --mx: 30vw;
   --my: 20vh;
@@ -42,16 +40,11 @@ body {
 
 body {
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 16px; /* Чуть увеличим для читаемости */
+  line-height: 1.6;
   color: var(--color-text-muted);
   background-color: var(--color-bg);
-  background-image:
-    radial-gradient(600px circle at var(--mx) var(--my), rgba(201, 169, 110, 0.12), transparent 60%),
-    radial-gradient(900px circle at var(--mx) var(--my), rgba(201, 169, 110, 0.06), transparent 70%),
-    radial-gradient(circle at top left, rgba(201, 169, 110, 0.05), transparent 45%),
-    radial-gradient(circle at bottom right, rgba(201, 169, 110, 0.03), transparent 60%);
-  background-attachment: fixed;
+  background-image: none; /* Убираем странные радиальные градиенты */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -163,12 +156,13 @@ p {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--color-bg);
+  background-color: rgb(255, 255, 255);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
 }
 
 .site-header.scrolled {
-  background: rgba(26, 26, 46, 0.97);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(10px);
 }
 
@@ -207,6 +201,7 @@ p {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-text-muted);
+  font-weight: 500;
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;
   transition: color var(--transition), border-color var(--transition);
@@ -265,7 +260,8 @@ p {
 
 .btn-primary {
   background: var(--color-gold);
-  color: var(--color-text-dark);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 119, 182, 0.2);
 }
 
 .btn-primary:hover {
@@ -278,9 +274,9 @@ p {
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--color-text);
-  border: 1px solid rgba(245, 240, 232, 0.3);
+  background: #F1F5F9;
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
@@ -313,25 +309,14 @@ p {
 /* ========================================
    Hero (photo only as background)
    ======================================== */
+
 .hero {
   position: relative;
   overflow: hidden;
-  background-image: url("https://placehold.co/1600x900/2E2E45/C9A96E?text=Hero%20Background");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; 
+  background-color: var(--color-bg);
+  padding: 100px 10px; /* Увеличили отступы сверху и снизу */
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(201, 169, 110, 0.22), transparent 48%),
-    linear-gradient(90deg, rgba(26, 26, 46, 0.93) 0%, rgba(26, 26, 46, 0.65) 55%, rgba(26, 26, 46, 0.92) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
 
 .hero .container {
   position: relative;
@@ -385,6 +370,7 @@ p {
 .service-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
   border-radius: var(--radius-md);
   padding: 24px 20px;
   transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
@@ -394,7 +380,7 @@ p {
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: rgba(201, 169, 110, 0.12);
+  background: rgba(0, 119, 182, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -650,10 +636,10 @@ p {
 .form input,
 .form select,
 .form textarea {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(245, 240, 232, 0.15);
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
   border-radius: var(--radius-sm);
-  color: var(--color-text);
+  color: var(--color-text-dark);
   font-family: var(--font-body);
   font-size: 14px;
   padding: 12px 16px;
@@ -667,7 +653,7 @@ p {
 }
 
 .form select option {
-  color: #000; /* или темный */
+  color: var(--color-text-dark);
 }
 /* END */
 
@@ -967,9 +953,10 @@ p {
    Footer
    ======================================== */
 .site-footer {
-  background-color: #0F0F1E;
-  padding-top: 40px;
+  background-color: #F8FAFC;
+  border-top: 1px solid var(--color-border);
   color: var(--color-text-muted);
+  padding-top: 40px;
 }
 
 .footer-grid {
