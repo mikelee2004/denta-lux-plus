@@ -329,6 +329,9 @@ p {
 
 .hero-subtitle {
   max-width: 560px;
+  color: rgba(26, 26, 26, 0.95);
+  /* На светлой части фона все нормально, но на границе с фото добавляем мягкую обводку */
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.65);
 }
 
 .hero-actions {
@@ -345,7 +348,8 @@ p {
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: rgba(26, 26, 26, 0.95);
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.65);
 }
 
 .hero-fact {
@@ -356,6 +360,95 @@ p {
 .hero-fact:last-child {
   border-right: none;
   padding-right: 0;
+}
+
+/* Right-side photo as background (no extra HTML block) */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Сдвигаем старт фонового кадра правее,
+     чтобы листья/детали на фото меньше попадали под текст слева */
+  left: 60%;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  /* Увеличиваем саму фотографию (зум),
+     чтобы она занимала больше места в Hero */
+  transform: scale(1.08);
+  transform-origin: right center;
+  will-change: transform;
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.55) 14%,
+      rgba(255, 255, 255, 0.0) 58%
+    ),
+    url("../assets/Hero-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .hero::after {
+    left: 52%;
+    background-position: right top;
+    /* Лёгкий "white blur" на фоне, чтобы текст не терял контраст */
+    filter: blur(6px);
+    transform: scale(1.08);
+    will-change: filter, transform;
+
+    background-image:
+      linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.97) 0%,
+        rgba(255, 255, 255, 0.62) 18%,
+        rgba(255, 255, 255, 0.0) 58%
+      ),
+      url("../assets/Hero-bg.png");
+  }
+
+  .hero-content {
+    max-width: 540px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero::after {
+    left: 0;
+    right: 0;
+    filter: blur(7px);
+    transform: scale(1.06);
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 0.64) 26%,
+        rgba(255, 255, 255, 0.0) 60%
+      ),
+      url("../assets/Hero-bg.png");
+    background-position: center top;
+  }
+
+  .hero-content {
+    max-width: none;
+  }
+
+  /* На мобильном фон сплошной, поэтому обводку делаем чуть слабее */
+  .hero-subtitle,
+  .hero-facts {
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.55);
+  }
 }
 
 /* ========================================
